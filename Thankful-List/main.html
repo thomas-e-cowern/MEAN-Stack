@@ -1,0 +1,43 @@
+<!DOCTYPE>
+
+<head>
+    <title>Be Thankful!</title>
+
+    <link rel=stylesheet type="text/css" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB4T-7bQvg-aJP_jqqCf8S-3yDB1jAaLCk",
+            authDomain: "greatful-list.firebaseapp.com",
+            databaseURL: "https://greatful-list.firebaseio.com",
+            projectId: "greatful-list",
+            storageBucket: "greatful-list.appspot.com",
+            messagingSenderId: "623198521010"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="javascript.js"></script>
+
+</head>
+
+<Body class="center" ng-app="myApp">
+    <div class="container-fluid" ng-controller="AppCtrl as home">
+        <h3>Add 3 things you are greatful for below</h3>
+        <form ng-submit="home.getNewList()">
+            <input type="date" id="date">
+            <input type="text" id="Greatful1">
+            <input type="text" id="Greatful2">
+            <input type="text" id="Greatful3">
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div ng-controller="AppCtrl as home">
+        <button type="button" ng-click="home.getGratefulList()">Get Some Stuff</button>
+    </div>
+
+</Body>
