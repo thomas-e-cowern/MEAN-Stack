@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="Buckets">
+    <head>
+        <title>Add Dates!</title>
+        
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.4.0/js/xeditable.js"></script>
+
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+				<link rel="stylesheet" href="../css/cover.css">
+        <script src="/js/module.buckets.js"></script>
+        <script src="/js/controller.home.js"></script>
+        <script src="/js/factory.buckets.js"></script>
+        
+    </head>
+    <body ng-controller="homeController as home">
+						<br>
+			<br>
+		<a class="btn btn-default" role="button" data-toggle="collapse" href="#Menu" aria-expanded="false" aria-controls="collapseExample">Menu</a>
+
+<div class="collapse" id="Menu">
+    <br>
+  <div class="well">
+    <a class="menu" href="/logout">Logout</a>
+    <a class="menu" href="/html/index.html">Add More Bucket List Items!</a>
+    <a class="menu" href="/html/prioritize.html">Prioritize Bucket List Items!</a>
+    <a class="menu" href="/html/addtasks.html">Add More Bucket List Tasks!</a>
+    <a class="menu" href="/html/bucketlist.html">View Your Bucket List!</a>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div>
+	<h2 class="center">Next we're going to set dates for your "Bucket List" items.</h2>
+</div>
+
+
+<section>
+	<div>
+		<div><br>
+			<div ng-repeat="buckets in home.bucketList">
+				<div class="center" id="list4">
+						<ul class="center">
+							<li><h2 class="highlight">{{buckets.bucketname}} </h2><h3>Due Date:<a onaftersave="home.dateBucket(buckets._id, buckets.bucketdate)" editable-text="buckets.bucketdate"  e-datepicker-popup="dd-MMMM-yyyy" href="#">{{ buckets.bucketdate }}</a></h3></li>
+						</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h4>Next we'll add tasks to your Bucket List items</h4>
+	<form action="/addtasks" method="GET">
+    <Button class="btn btn-default">Click to add tasks...</Button>
+  </form>
+      </body>
+</html>

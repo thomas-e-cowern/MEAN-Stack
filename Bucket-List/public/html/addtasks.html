@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="Buckets">
+    <head>
+        <title>Add Tasks!</title>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.4.0/js/xeditable.js"></script>
+        <!--<script type="text/javascript" src="dist/ng-sortable.min.js"></script>-->
+				<link type="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+				<link rel="stylesheet" type="text/css"  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+				<link rel="stylesheet" href="../css/cover.css">
+        <script src="/js/module.buckets.js"></script>
+        <script src="/js/controller.home.js"></script>
+        <script src="/js/factory.buckets.js"></script>
+        
+    </head>
+    <body ng-controller="homeController as home">
+			<br>
+			<br>
+	<a class="btn btn-default" role="button" data-toggle="collapse" href="#Menu" aria-expanded="false" aria-controls="collapseExample">Menu</a>
+
+<div class="collapse" id="Menu">
+    <br>
+  <div class="well">
+    <a class="menu" href="/logout">Logout</a>
+    <a class="menu" href="/html/index.html">Add More Bucket List Items!</a>
+		<a class="menu" href="/html/prioritize.html">Prioritize Bucket List Items!</a> 
+    <a class="menu" href="/html/datebuckets.html">Edit Bucket List Dates!</a>
+    <a class="menu" href="/html/bucketlist.html">View Your Bucket List!</a>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br> 
+<div>
+	<h2 class="center">Next we're going to add tasks to your "Bucket List" items.</h2>
+</div>
+<div>
+	<h3 class="headButton center"> Select the "Bucket List" item from the dropdown below and enter a task in the task textbox.</h3>
+
+<br>
+<select class="input dropdown" value="home.selectedName._id" ng-model="home.selectedName" ng-options="x.bucketname for x in home.bucketList" ng-change="home.test()">
+</select>
+<br>
+<br>
+
+<div class="center">
+	Enter your task: 
+	<br>
+	<input class="dropdown input" type="text" id="task" value="" ng-model="home.Task.taskname" placeholder="Enter a Task Here">
+	<br>
+	<br>
+	<button class="btn btn-default" type="submit" ng-click="home.addTask()">Submit</button>
+</div>
+
+<section>
+	<div class="container-fluid">
+
+			<div ng-repeat="tasks in home.taskList">
+				<div class="center" id="list4">
+
+						<ul>
+						<li><h2> <a href="#">{{tasks.taskname}}</a></h2></li>
+						</ul>
+
+				</div>
+			</div>
+
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<h4>Next we'll view your Bucket List items</h4>
+	<form action="/bucketlist" method="GET">
+    <Button class="btn btn-default">Click to view your Bucket List...</Button>
+  </form>
+      </body>
+</html>
