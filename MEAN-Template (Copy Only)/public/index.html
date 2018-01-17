@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="/JS/controller.js"></script>
+    <title>Test</title>
+</head>
+
+<body  ng-controller="appCtrl as home">
+This is the main page<br>
+{{home.message}}<br>
+    <form id="login" ng-submit="home.login.submit()">
+Name: <input type="text" ng-model="home.dummyName.Name">
+<button id="add" ng-click="home.addDummyData()">Add Name</button><button ng-click="home.updateDummyData(name._id)">Update</button>
+</form>
+
+<div ng-repeat="name in home.dummyData">
+
+Name: {{ name.Name }}  <button ng-click="home.deleteDummyData(name._id)">Delete</button> <button ng-click="home.editDummyData(name._id)">Edit</button>
+</div>
+
+</body>
+
+</html>
