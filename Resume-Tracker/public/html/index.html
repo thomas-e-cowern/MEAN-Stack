@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html ng-app="Resume">
+
+<head>
+    <title>MEAN Stack Template!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.4.0/js/xeditable.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/cover.css">
+    <script src="/js/module.resume.js"></script>
+    <script src="/js/controller.home.js"></script>
+    <script src="/js/factory.resume.js"></script>
+
+</head>
+
+<body ng-controller="homeController as home">
+
+    <a class="btn btn-default" role="button" data-toggle="collapse" href="#Menu" aria-expanded="false" aria-controls="collapseExample">Menu</a>
+    <div class="collapse" id="Menu">
+        <br>
+        <div class="well">
+            <a class="menu" href="/logout">Logout</a>
+            <a class="menu" href="/html/index.html">Add More Bucket List Items!</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h2>Resume Tracking Suite</h2>
+        <p>Use the tools below to help you track your resumes and interviews and check career websites.</p>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Resume Tracker</a></li>
+            <li><a data-toggle="tab" href="#tab1">Interview Information</a></li>
+            <li><a data-toggle="tab" href="#tab2">Career Web Sites</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>Resume Tracker</h3>
+                <div class="headButton">
+
+                    <!-- Button for triggering resume modal -->
+                    <button type="button" class="btn btn-primary btn-lg button" data-toggle="modal" data-target="#myResModal">Add to your "Resume List"
+                    </button>
+                    <!-- Resume Modal -->
+                    <div class="modal fade" id="myResModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form ng-submit="home.addResume()">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Enter Resume Informtion</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Job Title: <input class="form-control" ng-model="home.resumeInfo.jobtitle" placeholder="Job Title"> Location: <input class="form-control" ng-model="home.resumeInfo.joblocation" placeholder="Location"> Company: <input class="form-control" ng-model="home.resumeInfo.company" placeholder="Company"> Company URL: <input class="form-control" ng-model="home.resumeInfo.companyurl" autocomplete="url" placeholder="Company URL"> Contact Name: <input class="form-control" ng-model="home.resumeInfo.contactname" placeholder="Contact Name"> Contact Phone: <input class="form-control" ng-model="home.resumeInfo.contactphone" autocomplete='tel' placeholder="Contact Phone"> Contact Email: <input class="form-control" ng-model="home.resumeInfo.contactemail" autocomplete='email' placeholder="Contact Email"> Date Submitted: <input class="form-control" ng-model="home.resumeInfo.datesubmitted" placeholder="Date Submitted"> Notes: <input class="form-control" ng-model="home.resumeInfo.notes" placeholder="Notes">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.clearModal()">Close</button>
+                                            <button type="button" id="updateResume" class="btn btn-default" ng-hide="home.show" ng-click="home.updateResume()" data-toggle="modal" data-target="#myResModal">Update Resume</button>
+                                            <button id="addButton" type="submit" class="btn btn-primary">Add Resume</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+
+                    <!--table for displaying Resume Information-->
+
+                    <table class="table table-bordered table-striped">
+
+                        <thead>
+                            <tr>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'title'">
+                    Title
+                    <span ng-show="sortType == 'title'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'location'">
+                    Location
+                    <span ng-show="sortType == 'location'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'company'">
+                    Company
+                    <span ng-show="sortType == 'company'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'url'">
+                    Company url
+                    <span ng-show="sortType == 'url'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactName'">
+                    Contact Name
+                    <span ng-show="sortType == 'contactName'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactPhone'">
+                    Contact Phone
+                    <span ng-show="sortType == 'contactPhone'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactEmail'">
+                    Contact Email
+                    <span ng-show="sortType == 'contactEmail'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'dateSubmitted'">
+                    Date Submitted
+                    <span ng-show="sortType == 'dateSubmitted'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'notes'">
+                    Notes
+                    <span ng-show="sortType == 'notes'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'followUp'">
+                    Follow Up
+                    <span ng-show="sortType == 'followUp'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="resume in home.resumeList | orderBy:sortType:sortReverse">
+                                <td>{{resume.jobtitle}}</td>
+                                <td>{{resume.joblocation}}</td>
+                                <td>{{resume.company}}</td>
+                                <td>{{resume.companyurl}}</td>
+                                <td>{{resume.contactname}}</td>
+                                <td>{{resume.contactphone}}</td>
+                                <td>{{resume.contactemail}}</td>
+                                <td>{{resume.datesubmitted}}</td>
+                                <td>{{resume.notes}}</td>
+                                <td>{{resume.followupdate | date: "fullDate"}}</td>
+                                <td><button class='btn btn-danger' ng-click='home.removeResume(resume._id)'>Remove</button></td>
+                                <td><button class='btn btn-warning' ng-click='home.editResume(resume._id)' data-toggle="modal" data-target="#myResModal">Edit</button></td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tab1" class="tab-pane fade">
+
+                <h3>Interview Information</h3>
+                <div class="headButton">
+
+                    <!-- Button triggering interview modal -->
+                    <button type="button" class="btn btn-primary btn-lg button" data-toggle="modal" data-target="#myIntModal">
+          Add to your "Interview Information"
+        </button>
+                    <!-- Interview Modal -->
+                    <div class="modal fade" id="myIntModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form ng-submit="home.addInterview()">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Enter Interview Informtion</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Interview Date: <input class="form-control" ng-model="home.newInterview.intDate" placeholder="Interview Date"> Interviewer Name: <input class="form-control" ng-model="home.newInterview.intName" placeholder="Interview Name"> Interviewer Title: <input class="form-control" ng-model="home.newInterview.intTitle" placeholder="Interview Title"> Company: <input class="form-control" ng-model="home.newInterview.company" placeholder="Company"> Interview Address: <input class="form-control" ng-model="home.newInterview.intAddress" autocomplete="street-address" placeholder="Interview Address"> Mailing Address: <input class="form-control" ng-model="home.newInterview.mailAddress" autocomplete='street-address' placeholder="Mailing Address"> Thank You Date: <input class="form-control" ng-model="home.newInterview.thanksDate" placeholder="Date to send Thank You"> Notes: <input class="form-control" ng-model="home.newInterview.notes" placeholder="Notes">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+
+                    <!-- Table for displaying Interview Information-->
+                    <table class="table table-bordered table-striped">
+
+                        <thead>
+                            <tr>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'interviewDate'">
+                    Interview Date
+                    <span ng-show="sortType == 'interviewDate'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'interviewerName'">
+                    Interviewer Name
+                    <span ng-show="sortType == 'interviewerName'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'interviewerTitle'">
+                    Interviewer TItle
+                    <span ng-show="sortType == 'interviewerTitle'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'company'">
+                    Company
+                    <span ng-show="sortType == 'company'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'interviewerAddress'">
+                    Interview Address
+                    <span ng-show="sortType == 'interviewerAddress'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'mailingAddress'">
+                    Mailing Address
+                    <span ng-show="sortType == 'mailingAddress'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'thankYouDate'">
+                    Thank You Date
+                    <span ng-show="sortType == 'thankYouDate'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="#" ng-click="sortType = 'notes'">
+                    Notes
+                    <span ng-show="sortType == 'notes'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="interview in home.interviewList | orderBy:sortType:sortReverse">
+                                <td>{{interview.intDate}}</td>
+                                <td>{{interview.intName}}</td>
+                                <td>{{interview.intTitle}}</td>
+                                <td>{{interview.company}}</td>
+                                <td>{{interview.intAddress}}</td>
+                                <td>{{interview.mailAddress}}</td>
+                                <td>{{interview.thanksDate | date: "fullDate"}}</td>
+                                <td>{{interview.notes}}</td>
+                                <td><button class='btn btn-danger' ng-click='home.remove(buckets._id)'>Remove</button></td>
+                                <td><button class='btn btn-warning' ng-click='home.edit(buckets._id)'>Edit</button></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab2" class="tab-pane fade">
+                <h3>Career Web Sites</h3>
+                <div class="headButton">
+
+                    <!-- Button for triggering career web site modal -->
+                    <button type="button" class="btn btn-primary btn-lg button" data-toggle="modal" data-target="#myCareerModal">
+          Use the following to track the Career Web Sites you use.
+        </button>
+                    <!-- Career Modal -->
+                    <div class="modal fade" id="myCareerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form ng-submit="home.addWebSite()">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Enter Web Site Information</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Web Site Name: <input class="form-control" ng-model="home.newWebSite.sitename" placeholder="Web Site Name"> URL: <input class="form-control" ng-model="home.newWebSite.url" autocomplete="url" placeholder="URL"> Last Searched: <input class="form-control" ng-model="home.newWebSite.lastsearched" placeholder="Last Searched"> Number of Jobs Applied: <input class="form-control" ng-model="home.newWebSite.jobsapplied" placeholder="Number of jobs applied"> Contacts: <input class="form-control" ng-model="home.newWebSite.contacts" placeholder="Contacts"> Interviews: <input class="form-control" ng-model="home.newWebSite.interviews" placeholder="Interviews"> Username: <input class="form-control" ng-model="home.newWebSite.username" placeholder="Username"> Password: <input class="form-control" ng-model="home.newWebSite.password" placeholder="Password (Optional)">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+
+                    <!--Table for displaying Web Site Information-->
+                    <table class="table table-bordered table-striped">
+
+                        <thead>
+                            <tr>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'sitename'">
+                    Web Site Name
+                    <span ng-show="sortType == 'sitename'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'url'">
+                    URL
+                    <span ng-show="sortType == 'url'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'lastsearched'">
+                    Last Searched
+                    <span ng-show="sortType == 'lastsearched'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'jobsapplied'">
+                    Number of Jobs Applied
+                    <span ng-show="sortType == 'jobsapplied'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contacts'">
+                    Contacts
+                    <span ng-show="sortType == 'contacts'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'interviews'">
+                    Interviews
+                    <span ng-show="sortType == 'interviews'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'username'">
+                    Username
+                    <span ng-show="sortType == 'username'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="#" ng-click="sortType = 'password'">
+                    Password
+                    <span ng-show="sortType == 'password'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="career in home.careerList | orderBy:sortType:sortReverse">
+                                <td>{{career.sitename}}</td>
+                                <td>{{career.url}}</td>
+                                <td>{{career.lastsearched}}</td>
+                                <td>{{career.jobsapplied}}</td>
+                                <td>{{career.contacts}}</td>
+                                <td>{{career.interviews}}</td>
+                                <td>{{career.username}}</td>
+                                <td>{{career.password}}</td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    </div>-->
+
+    <!--
+    <br>
+    <br>
+    <a class="btn btn-default" role="button" data-toggle="collapse" href="#Menu" aria-expanded="false" aria-controls="collapseExample">Menu</a>
+
+    <div class="collapse" id="Menu">
+        <br>
+        <div class="well">
+            <a class="menu" href="/logout">Logout</a>
+            <a class="menu" href="/html/bucketlist.html">User Profile!</a>
+        </div>
+    </div>
+    <h1>Use the form below to add an item to the template list.</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="warning" class="warning" hidden="true">PLEASE ADD INFORMATION BEFORE SUBMITTING</div>
+    <tbody>
+        <tr>
+            <input type="text" class="text" ng-model="home.BucketItem.bucketname" placeholder="Enter a list item for the template">
+            <input id="add" type="submit" ng-click="home.addBucket()" class="btn btn-default">
+
+            <td><button id="update" disabled="true" class="btn btn-info" ng-click="home.update(home.BucketItem)">Update</button>&nbsp;&nbsp;
+                <button class="btn btn-info" ng-click="home.deselect()">Clear</button></td>
+        </tr>
+    </tbody>
+    <br>
+    <div ng-repeat="buckets in home.bucketList track by $index">
+        <div class="center" id="list4">
+            <ul class='center'>
+                <li>
+                    <h2> {{buckets.bucketname}} </h2>
+                    <td><button class='btn btn-danger' ng-click='home.remove(buckets._id)'>Remove</button></td>
+                    <td><button class='btn btn-warning' ng-click='home.edit(buckets._id)'>Edit</button></td>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+-->
+
+
+</body>
+
+</html>
