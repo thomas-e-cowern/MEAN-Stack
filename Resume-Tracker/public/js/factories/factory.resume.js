@@ -1,4 +1,4 @@
-angular.module('ResumeTracker')
+angular.module('Resume')
     .factory('resumeFactory', resumeFactory);
 
 resumeFactory.$inject = ['$http'];
@@ -8,19 +8,19 @@ function resumeFactory($http) {
 
     return {
 
-        createUser: function (userData) {
-            return $http.post('/register', userData);
-        },
-
-        getUserData: function () {
-            console.log('Hit getUserData in factory');
-            return $http.get('/api/getUserData')
-        },
-        
-        updateUserData: function (userData) {
-            console.log('Hit updateUserData in factory');
-            return $http.put('/api/updateUserData', userData);
-        },
+//        createUser: function (userData) {
+//            return $http.post('/register', userData);
+//        },
+//
+//        getUserData: function () {
+//            console.log('Hit getUserData in factory');
+//            return $http.get('/api/getUserData')
+//        },
+//        
+//        updateUserData: function (userData) {
+//            console.log('Hit updateUserData in factory');
+//            return $http.put('/api/updateUserData', userData);
+//        },
         
         addResume: function (newResData) {
             console.log('Hit addResume in factory', newResData);

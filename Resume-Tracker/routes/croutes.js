@@ -5,22 +5,6 @@ var Career = require('../controllers/Career'),
 
 module.exports = (app) => {
 
-    app.get('/', Auth.middlewares.session);
-
-
-    app.get('/', (req, res) => {
-        res.sendFile('index.html', {
-            root: './public/html'
-        })
-    });
-
-    app.get('/homepage', (req, res) => {
-        res.sendFile('homepage.html', {
-            root: './public/html'
-        })
-    });
-
-    app.all('/api*', Auth.middlewares.session);
 
 //    //Routes for interview CRUD operations
     app.get('/api/career', Career.getCareer); //Read

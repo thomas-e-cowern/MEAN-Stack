@@ -46,7 +46,7 @@ module.exports = {
     },
     logout: (req, res) => {
         req.session.destroy();
-        res.redirect('/html/login.html');
+        res.redirect('/html/start.html');
     },
     register: (req, res) => {
         console.log("You hit registration");
@@ -58,25 +58,30 @@ module.exports = {
         // when this function fires, it is going to hit the pre save middleware
         newUser.save((err, user) => {
             if (err) {
-                return res.send(err);
+                return res.send('newUser error: ', err);
             }
             // req.session.userId = user._id;
             // res.redirect('/html/index.html');
 
-            req.session.uid = user._id; // set the user in the session!
+            req.session.userId = user._id; // set the user in the session!
             res.send("Successfully registered!"); // send a success message
         });
     },
     middlewares: {
         session: (req, res, next) => { // this will be the middleware that checks for a loggedin user
             console.log("Inside session");
+            console.log('middleware session: ', req.session.userId);
             if (!req.session.userId) {
+                
+                if (req.session.userId === undefined) {
+//                    res.send('No session info');
+                    res.redirect('/html/start.html');
+                } else {
 
-                res.redirect('/html/homepage.html');
-                console.log("Should redirect to homepage")
-                //                res.send('No user logged in');
-                //                next ();
-
+                res.redirect('/html/start.html');
+                console.log('Not logged in')
+                
+                }
 
             } else {
 

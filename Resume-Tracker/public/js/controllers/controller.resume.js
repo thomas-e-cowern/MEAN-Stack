@@ -25,6 +25,9 @@ function homeController(resumeFactory, $http) {
         resumeFactory.getResume()
             .then(function (resResponse) {
                 console.log('getResume resp: ', resResponse.data);
+                    if (resResponse.data === 'No session info') {
+                        window.location.href = "/html/start.html";
+                    }
                 home.resumeList = resResponse.data;
             });
         
@@ -39,18 +42,18 @@ function homeController(resumeFactory, $http) {
         home.showAdd = false;
     };
 
-    home.getUserData = function () {
-        console.log('Hit get user data');
-        resumeFactory.getUserData()
-            .then(function (returnUser) {
-                console.log('getUserData ', returnUser.data);
-                home.userData = returnUser.data;
-                home.userData.created = moment(returnUser.data.created);
-            });
-
-    }
-    
-    home.getUserData();
+//    home.getUserData = function () {
+//        console.log('Hit get user data');
+//        resumeFactory.getUserData()
+//            .then(function (returnUser) {
+//                console.log('getUserData ', returnUser.data);
+//                home.userData = returnUser.data;
+//                home.userData.created = moment(returnUser.data.created);
+//            });
+//
+//    }
+//    
+//    home.getUserData();
     
     home.addResume = function () {
         console.log('Hit addResume function');
@@ -63,25 +66,25 @@ function homeController(resumeFactory, $http) {
         home.getResume();
     };
     
-    home.updateUserData = function () {
-      console.log('Hit updateUserData');  
-        console.log('updateUserData: ', home.userData);
-        resumeFactory.updateUserData(home.userData)
-            .then(function (returnData) {
-                console.log('updateUserData return: ', returnData); 
-        });
-    };
-
-    home.createUser = function () {
-        resumeFactory.createUser(home.newUser)
-            .then(function (returnData) {
-                console.log('User reg res from server : ', returnData)
-                home.newUser = {}; // reset the form
-                window.location.href = "/";
-            }).catch(function (err) {
-                console.log("create user error", err);
-            });
-    }
+//    home.updateUserData = function () {
+//      console.log('Hit updateUserData');  
+//        console.log('updateUserData: ', home.userData);
+//        resumeFactory.updateUserData(home.userData)
+//            .then(function (returnData) {
+//                console.log('updateUserData return: ', returnData); 
+//        });
+//    };
+//
+//    home.createUser = function () {
+//        resumeFactory.createUser(home.newUser)
+//            .then(function (returnData) {
+//                console.log('User reg res from server : ', returnData)
+//                home.newUser = {}; // reset the form
+//                window.location.href = "/";
+//            }).catch(function (err) {
+//                console.log("create user error", err);
+//            });
+//    };
 
     home.removeResume = function (id) {
         console.log(id);

@@ -1,28 +1,3 @@
-<!DOCTYPE html>
-<html ng-app="ResumeTracker">
-
-<head>
-    <title>Register!</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
-    <link rel="stylesheet" href="../css/cover.css">
-    <script src="/js/modules/module.resumetracker.js"></script>
-    <script src="/js/modules/module.interview.js"></script>
-    <script src="/js/modules/module.career.js"></script>
-    <script src="/js/controllers/controller.resume.js"></script>
-    <script src="/js/factories/factory.resume.js"></script>
-
-</head>
-
-<body ng-controller="homeController as home">
-
-
-
-    <div>
-        <a href="/html/homepage.html">Back to Homepage</a>
-    </div>
 
 
     <div>
@@ -30,23 +5,23 @@
     </div>
 
 
-    <form ng-submit="home.createUser()">
-        <input class="text" ng-model="home.newUser.username" placeholder="Create a User Name">
+    <form ng-submit="user.createUser()">
+        <input class="text" ng-model="user.newUser.username" placeholder="Create a User Name">
         <br>
         <br>
-        <input class="text" ng-model="home.newUser.email" autocomplete='email' placeholder="Enter Email">
+        <input class="text" ng-model="user.newUser.email" autocomplete='email' placeholder="Enter Email">
         <br>
         <br>
-        <input class="text" ng-model="home.newUser.firstname" autocomplete='given-name' placeholder="Enter First Name" ng-list>
+        <input class="text" ng-model="user.newUser.firstname" autocomplete='given-name' placeholder="Enter First Name" ng-list>
         <br>
         <br>
-        <input class="text" ng-model="home.newUser.lastname" autocomplete='family-name' placeholder="Enter Last Name" ng-list>
+        <input class="text" ng-model="user.newUser.lastname" autocomplete='family-name' placeholder="Enter Last Name" ng-list>
         <br>
         <br>
-        <input class="text" ng-model="home.newUser.birthdate" placeholder="Enter Birth Date in mm-dd-yyyy format" ng-list>
+        <input class="text" ng-model="user.newUser.birthdate" placeholder="Enter Birth Date in mm-dd-yyyy format" ng-list>
         <br>
         <br>
-        <input class="text" ng-model="home.newUser.password" placeholder="Create Password" ng-list>
+        <input class="text" ng-model="user.newUser.password" placeholder="Create Password" ng-list>
         <br>
         <br>
         <input type="submit" class="btn btn-default">
@@ -54,10 +29,6 @@
 
     
         <div class="inner">
-            <p>The MEAN Stack Template created by Thomas E. Cowern</p>
+            <p>The Resume Tracker created by Thomas E. Cowern</p>
         </div>
-    
 
-</body>
-
-</html>

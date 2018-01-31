@@ -24,6 +24,11 @@ a:hover {
     margin-top: 25%;
 }
 
+/* Custom login error */
+.login-error {
+    color: red;
+}
+
 /*
  * Base structure
  */

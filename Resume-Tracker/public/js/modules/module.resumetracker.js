@@ -1,1 +1,1 @@
-angular.module('ResumeTracker', ['Resume', 'Interview', 'Career']);
+angular.module('ResumeTracker', ['Resume', 'Interview', 'Career', 'User']);
