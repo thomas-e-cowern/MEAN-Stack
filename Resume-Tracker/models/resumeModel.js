@@ -9,9 +9,10 @@ var mongoose = require('mongoose');
     contactname: {type: String, default: ""},
     contactphone: {type : String, default: ""},
     contactemail: {type : String, default: ""},
-    datesubmitted: {type : String, default: ""},
+    datesubmitted: {type : Date},
     notes: {type : String, default: ""},
-    followupdate: {type : String, default: ""}
+    followupdate: {type : Date},
+    archive: {type : Boolean, default: false}
 });
 
 module.exports = mongoose.model('Resume', resumeSchema);

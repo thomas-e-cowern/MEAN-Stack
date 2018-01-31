@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
-careerSchema = new mongoose Schema({
+careerSchema = new mongoose.Schema({
     userid: {type: mongoose.Schema.ObjectId, ref: "User"},
     websitename: {type : String, default: ""},
     url: {type : String, default: ""},
-    lastsearched: {type : String, default: ""},
+    lastsearched: {type : Date},
     numberapplied: {type : String, default: ""},
     contact: {type: String, default: ""},
     interviews: {type: String, default: ""},

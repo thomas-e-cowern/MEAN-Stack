@@ -1,0 +1,1 @@
+angular.module('ResumeTracker', ['Resume', 'Interview', 'Career']);

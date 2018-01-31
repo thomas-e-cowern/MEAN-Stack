@@ -1,7 +1,5 @@
-angular.module('Resume')
+angular.module('ResumeTracker')
     .factory('resumeFactory', resumeFactory);
-
-
 
 resumeFactory.$inject = ['$http'];
 
@@ -14,14 +12,14 @@ function resumeFactory($http) {
             return $http.post('/register', userData);
         },
 
-        getUserId: function () {
-            console.log('Hit getUserId in factory');
-            $http.get('/api/getUserId')
-        },
-
         getUserData: function () {
             console.log('Hit getUserData in factory');
-            $http.get('/api/getUserData')
+            return $http.get('/api/getUserData')
+        },
+        
+        updateUserData: function (userData) {
+            console.log('Hit updateUserData in factory');
+            return $http.put('/api/updateUserData', userData);
         },
         
         addResume: function (newResData) {
@@ -32,12 +30,6 @@ function resumeFactory($http) {
         getResume: function () {
             console.log('Hit getResume in factory');
             return $http.get('/api/resume');
-        },
-
-        getBucket: function (bucketID) {
-            console.log("Hit the getBucket in factory");
-            bucketID = bucketID ? '/' + bucketID : ''
-            return $http.get('/api/buckets' + bucketID)
         },
 
         editResume: function (id) {
@@ -54,12 +46,6 @@ function resumeFactory($http) {
             console.log('removeResume factory', id)
             return $http.post('/api/resume/' + id)
         },
-
-        addBucket: function (bucketItem) {
-            return $http.post('/api/buckets', bucketItem);
-        },
-
-
 
     }
 }

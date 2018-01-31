@@ -34,7 +34,36 @@ function getUserData(req, res) {
 
 }
 
+function updateUserData (req, res) {
+    console.log('Hit updateUserData');
+    console.log('id: ', req.body._id);
+    console.log('updateUserData: ', req.body)
+
+    Users.findByIdAndUpdate({
+        _id: req.body._id
+    }, {
+        username: req.body.username,
+        email: req.body.email,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        birthdate: req.body.birthdate
+    }, {
+        new: true
+    }, (err, document) => {
+        // res.send(err || documents)
+        if (err) {
+            res.send(err);
+        } else {
+            console.log("DOCUMENT from upateUserData", document);
+            res.status(200).send(document);
+        }
+    });
+}
+
+
+
 module.exports = {
     getUserID: getUserID,
-    getUserData: getUserData
+    getUserData: getUserData,
+    updateUserData: updateUserData
 }

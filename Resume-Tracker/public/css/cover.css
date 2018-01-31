@@ -19,6 +19,10 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+/* Custom login page */
+.login {
+    margin-top: 25%;
+}
 
 /*
  * Base structure
@@ -40,6 +44,13 @@ body {
 
 .text {
     color: black;
+}
+
+/* Custom Userinfo Page*/
+.user {
+    text-align: left;
+    font-size: 24px;
+    padding: 10px;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */

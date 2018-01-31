@@ -1,6 +1,6 @@
-var Resume = require('./controllers/resume'),
-    Users = require('./controllers/users'),
-    Auth = require('./controllers/auth'),
+var Resume = require('../controllers/resume'),
+    Users = require('../controllers/users'),
+    Auth = require('../controllers/auth'),
     express = require('express');
 
 
@@ -15,18 +15,11 @@ module.exports = (app) => {
         })
     });
 
-//    app.get('/bucketlist', (req, res) => {
-//        res.sendFile('bucketlist.html', {
-//            root: './public/html'
-//        })
-//    });
-
     app.get('/homepage', (req, res) => {
         res.sendFile('homepage.html', {
             root: './public/html'
         })
     });
-
 
     app.all('/api*', Auth.middlewares.session);
 
@@ -39,13 +32,12 @@ module.exports = (app) => {
     //Routes for user id and data
     app.get('/api/getUserId', Users.getUserID);
     app.get('/api/getUserData', Users.getUserData);
+    app.put('/api/updateUserData', Users.updateUserData);
 
-    //Routes for CRUD operations
+    //Routes for Resume CRUD operations
     app.get('/api/resume', Resume.getResume); //Read
     app.get('/api/resume/:id', Resume.getResume); //Read
     app.post('/api/resume', Resume.addResume); //Create
     app.post('/api/resume/:id', Resume.removeResume); //Delete
     app.put('/api/resume/', Resume.updateResume); //update
-
-
 }

@@ -1,0 +1,122 @@
+
+                <h3>Resume Tracker</h3>
+                <div class="headButton">
+
+                    <!-- Button for triggering resume modal -->
+                    <button type="button" class="btn btn-primary btn-lg button" data-toggle="modal" data-target="#myResModal" ng-click="home.generateDate()">Add to your "Resume List"
+                    </button>
+                    <br><br>
+                    <label>Search: <input class="text" ng-model="searchText"></label>
+                    <!-- Resume Modal -->
+                    <div class="modal fade" id="myResModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form ng-submit="home.addResume()">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Enter Resume Informtion</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Job Title: <input class="form-control" ng-model="home.resumeInfo.jobtitle" placeholder="Job Title"> Location: <input class="form-control" ng-model="home.resumeInfo.joblocation" placeholder="Location"> Company: <input class="form-control" ng-model="home.resumeInfo.company" placeholder="Company"> Company URL: <input class="form-control" ng-model="home.resumeInfo.companyurl" autocomplete="url" placeholder="Company URL"> Contact Name: <input class="form-control" ng-model="home.resumeInfo.contactname" placeholder="Contact Name"> Contact Phone: <input class="form-control" ng-model="home.resumeInfo.contactphone" autocomplete='tel' placeholder="Contact Phone"> Contact Email: <input class="form-control" type="email" ng-model="home.resumeInfo.contactemail" autocomplete='email' placeholder="Contact Email"> Date Submitted: <input class="form-control" ng-model="home.resumeInfo.datesubmitted" placeholder="Date Submitted"> Follow-up Date: <input class="form-control" ng-model="home.resumeInfo.followupdate" placeholder="Follow Up Date"> Notes: <input class="form-control" ng-model="home.resumeInfo.notes" placeholder="Notes">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.clearModal()">Close</button>
+                                            <button type="button" id="updateResume" class="btn btn-default" ng-hide="home.showEdit" ng-click="home.updateResume()" data-toggle="modal" data-target="#myResModal">Update Resume</button>
+                                            <button ng-hide="home.showAdd" id="addButton" type="submit" class="btn btn-primary">Add Resume</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+
+                    <!--table for displaying Resume Information-->
+
+                    <table class="table table-bordered">
+
+                        <thead>
+                            <tr>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'jobtitle'">
+                    Title
+                    <span ng-show="sortType == 'jobtitle'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'joblocation'">
+                    Location
+                    <span ng-show="sortType == 'joblocation'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'company'">
+                    Company
+                    <span ng-show="sortType == 'company'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'companyurl'">
+                    Company url
+                    <span ng-show="sortType == 'companyurl'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactname'">
+                    Contact Name
+                    <span ng-show="sortType == 'contactname'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactphone'">
+                    Contact Phone
+                    <span ng-show="sortType == 'contactphone'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'contactemail'">
+                    Contact Email
+                    <span ng-show="sortType == 'contactemail'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'datesubmitted'">
+                    Date Submitted
+                    <span ng-show="sortType == 'datesubmitted'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'notes'">
+                    Notes
+                    <span ng-show="sortType == 'notes'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="sortType = 'followupdate'">
+                    Follow Up
+                    <span ng-show="sortType == 'followupdate'" class="fa fa-caret-down"></span>
+                    </a>
+                                </td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="resume in home.resumeList  | orderBy:sortType | filter:searchText">
+                                <td>{{resume.jobtitle}}</td>
+                                <td>{{resume.joblocation}}</td>
+                                <td>{{resume.company}}</td>
+                                <td>{{resume.companyurl}}</td>
+                                <td>{{resume.contactname}}</td>
+                                <td>{{resume.contactphone}}</td>
+                                <td>{{resume.contactemail}}</td>
+                                <td>{{resume.datesubmitted | date: 'mediumDate'}}</td>
+                                <td>{{resume.notes}}</td>
+                                <td ng-style="{'color' : 'blue'}">{{resume.followupdate | date: 'mediumDate'}}</td>
+                                <td><button class='btn btn-danger' ng-click='home.removeResume(resume._id)'>Remove</button></td>
+                                <td><button class='btn btn-warning' ng-click='home.editResume(resume._id)' data-toggle="modal" data-target="#myResModal">Edit</button></td>
+                        </tbody>
+                    </table>
+                </div>
+            

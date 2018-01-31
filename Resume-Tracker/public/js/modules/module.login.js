@@ -21,9 +21,9 @@ angular.module('module.login',[])
                 location.href = '/';
             }, function(err) {
                 // DO NOT FORGET!!!! an error callback
-                
+                login.message = err.data.message
                 // when things go bad, you need this!!!!!!!!
-                console.error('Login error: ', err);
+                console.error('Login error: ', err.data.message);
             });
         }
     }]);

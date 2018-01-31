@@ -54,7 +54,7 @@ function removeResume (req, res) {
 function getResume (req, res) {
     // get One
     console.log('Get function from edit')
-    console.log('Userid: ', req.session.id);
+    console.log('Userid: ', req.session.userId);
 
     if (req.params.id) {
         console.log('Hit get one...');

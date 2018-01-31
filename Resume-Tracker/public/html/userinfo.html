@@ -1,0 +1,38 @@
+<h3>
+    User Information</h3>
+<div>
+    <h2 class="center">Below is your personal information. You can make changes as necessary</h2>
+</div>
+
+<br>
+<br>
+<div>
+    <table width="100%">
+        <tr>
+            <td class="user">Username:</td>
+            <td><input class="form-control user" ng-model="home.userData.username"></td>
+        </tr>
+        <tr>
+            <td class="user">Email:</td>
+            <td><input class="form-control user" ng-model="home.userData.email"></td>
+        </tr>
+        <tr>
+            <td class="user">First Name:</td>
+            <td><input class="form-control user" ng-model="home.userData.firstname"></td>
+        </tr>
+        <tr>
+            <td class="user">Last Name</td>
+            <td><input class="form-control user" ng-model="home.userData.lastname"></td>
+        </tr>
+        <tr>
+            <td class="user">Birthday:</td>
+            <td><input class="form-control user" ng-model="home.userData.birthdate"></td>
+        </tr>
+        <tr>
+            <td class="user">Joined:</td>
+            <td><input class="form-control user" ng-model="home.userData.created" disabled='true'></td>
+        </tr>
+    </table>
+    <br>
+    <button id="editButton" class="btn btn-primary" ng-click="home.updateUserData()">Submit Changes</button>
+</div>
