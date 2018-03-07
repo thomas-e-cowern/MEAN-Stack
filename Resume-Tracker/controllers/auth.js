@@ -58,7 +58,9 @@ module.exports = {
         // when this function fires, it is going to hit the pre save middleware
         newUser.save((err, user) => {
             if (err) {
-                return res.send('newUser error: ', err);
+                // return res.send('newUser error: ', err);
+                res.status(500).send(err);
+                return;
             }
             // req.session.userId = user._id;
             // res.redirect('/html/index.html');
@@ -72,15 +74,15 @@ module.exports = {
             console.log("Inside session");
             console.log('middleware session: ', req.session.userId);
             if (!req.session.userId) {
-                
+
                 if (req.session.userId === undefined) {
 //                    res.send('No session info');
-                    res.redirect('/html/start.html');
+                    return
                 } else {
 
                 res.redirect('/html/start.html');
                 console.log('Not logged in')
-                
+
                 }
 
             } else {

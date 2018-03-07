@@ -4,6 +4,9 @@
         <h1 class="cover-heading white">Fill out the form below to start saving job application information!</h1>
     </div>
 
+    <div>
+        <h1 class="cover-error">{{ user.registrationMessage }}</h1>
+    </div>
 
     <form ng-submit="user.createUser()">
         <input class="text" ng-model="user.newUser.username" placeholder="Create a User Name">
@@ -27,8 +30,7 @@
         <input type="submit" class="btn btn-default">
     </form>
 
-    
+
         <div class="inner">
             <p>The Resume Tracker created by Thomas E. Cowern</p>
         </div>
-

@@ -3,14 +3,15 @@
 <div>
     <h2 class="center">Below is your personal information. You can make changes as necessary</h2>
 </div>
-
 <br>
-<br>
+<div>
+    <h1 class="update-success">{{ user.updateMessage }}</h1>
+</div>
 <div>
     <table width="100%">
         <tr>
             <td class="user">Username:</td>
-            <td><input class="form-control user" ng-model="user.userData.username"></td>
+            <td><input class="form-control user" ng-model="user.userData.username" disabled='true'></td>
         </tr>
         <tr>
             <td class="user">Email:</td>
