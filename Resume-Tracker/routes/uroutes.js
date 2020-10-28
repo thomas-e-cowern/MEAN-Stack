@@ -8,12 +8,14 @@ module.exports = (app) => {
 
 
     app.get('/', (req, res) => {
+        console.log('Inside user home route')
         res.sendFile('index.html', {
             root: './public/html'
         })
     });
 
     app.get('/homepage', (req, res) => {
+      console.log('Inside user homepage route')
         res.sendFile('homepage.html', {
             root: './public/html'
         })
@@ -24,11 +26,11 @@ module.exports = (app) => {
     //Routes for login/logout/register
     app.get('/logout', Auth.logout);
     app.post('/login', Auth.login);
-    app.post('/register', Auth.register);    
-    
+    app.post('/register', Auth.register);
+
     //Routes for user id and data
     app.get('/api/getUserId', Users.getUserID);
     app.get('/api/getUserData', Users.getUserData);
     app.put('/api/updateUserData', Users.updateUserData);
-    
+
 };

@@ -21,7 +21,7 @@ function userController($http, userFactory) {
                 password: user.password
             }
         }).then(function (res) {
-            // console.info("login response: ", res.data);
+            console.info("login response: ", res.data);
 
             // user.getUserData();
 

@@ -76,7 +76,7 @@ module.exports = {
             if (!req.session.userId) {
 
                 if (req.session.userId === undefined) {
-//                    res.send('No session info');
+                   console.log('No session info');
                     return
                 } else {
 

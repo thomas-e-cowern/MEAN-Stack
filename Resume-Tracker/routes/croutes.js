@@ -1,4 +1,4 @@
-var Career = require('../controllers/Career'),
+var Career = require('../controllers/career'),
     Auth = require('../controllers/auth'),
     express = require('express');
 

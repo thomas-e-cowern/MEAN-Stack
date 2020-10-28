@@ -20,7 +20,7 @@ var express = require('express'),
         }
     }); // encrypted cookies!
 
-mongoose.connect('mongodb://localhost/resume-tracker');
+mongoose.connect(process.env.MONGOLAB_MAROON_URI || 'mongodb://localhost/resume-tracker');
 
 var PORT = process.env.PORT || 3000
 
@@ -30,7 +30,9 @@ var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:true}), bodyParser.json());
 app.use(sessions);
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public/html')));
+app.use("/html", express.static(__dirname + 'public/html'));
+app.use("/js", express.static(__dirname + 'public/js'));
 
 // Routes
 URoutes(app);
@@ -38,6 +40,6 @@ CRoutes(app);
 RRoutes(app);
 IRoutes(app);
 
-app.listen(3000, ()=>{
+app.listen(PORT, ()=>{
     console.log('Resume Tracker server is running on: ', PORT);
 });
